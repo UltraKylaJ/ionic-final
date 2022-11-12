@@ -1,19 +1,8 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import CompletedTasks from '../components/Completed';
-import IncompleteTasks from '../components/Incomplete';
-// import ExploreContainer from '../components/ExploreContainer';
+
 import './Home.css';
 
-const Home: React.FC = () => {
-
-  // incompleteTasks[]
-
-  // completeTasks[]
-
-  // displayIncomplete
-
-  // displayComplete
-
+const IncompleteTasks: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -27,12 +16,10 @@ const Home: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IncompleteTasks />
-        <CompletedTasks />
-        {/* addTask button footer floating */}
+        {/* <ExploreContainer /> */}
       </IonContent>
     </IonPage>
   );
 };
 
-export default Home;
+export default IncompleteTasks;
