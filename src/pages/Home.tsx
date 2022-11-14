@@ -9,16 +9,16 @@ import './Home.css';
 const Home: React.FC = () => {
 
   let [ newTask, setNewTask ] = useState({
-    title: 'newTask',
-    completed: false
+    title: ''
   })
 
   let { addTask } = useContext(TaskContext);
-  const { showAlert, showConfirm, showPrompt } = useDialog();
+  const { showPrompt } = useDialog();
 
   const prompt = async () => {
-    showPrompt('New Task!', 'What\'s your new task?').then(newTask => {
-      console.log('New Task: ' + newTask);
+    showPrompt('New Task!', 'What\'s your new task?').then(newTitle => {
+      console.log('New Task: ' + newTitle);
+      setNewTask({title: newTitle});
       addTask(newTask);
     });
 }

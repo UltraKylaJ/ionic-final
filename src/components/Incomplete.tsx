@@ -25,7 +25,7 @@ const IncompleteTasks: React.FC = () => {
 
     function toggle(event: any) {
         setTasked({_id: event.target.value});
-        console.log(tasked);
+        // console.log(tasked);
         let id = tasked._id;
         editTask(id).then(() => {
             window.location.reload();
@@ -47,7 +47,7 @@ const IncompleteTasks: React.FC = () => {
                                     // {console.log(task)}
                                     return (
                                         <>
-                                        {console.log(t._id)}
+                                        {/* {console.log(t._id)} */}
                                         <IonItem key={t._id}>
                                             <IonCheckbox slot='start' value={t._id} checked={false} onClick={toggle} />
                                             <IonLabel>{t.title}</IonLabel>

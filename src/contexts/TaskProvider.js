@@ -15,18 +15,18 @@ export const TaskProvider = (props) => {
         fetchData();
     }, []);
 
-    function getAllTasks() {
+    async function getAllTasks() {
         return axios.get(baseUrl).then(response => setTask(response.data));
     }
 
-    function addTask(task) {
+    async function addTask(task) {
         return axios.post(baseUrl, task).then(response => {
             getAllTasks();
             return new Promise(resolve => resolve(response.data));
         });
     }
 
-    function editTask(id) {
+    async function editTask(id) {
         let url = baseUrl + `${task._id}`;
         
         return axios.put(url, id).then(response => {
@@ -35,7 +35,7 @@ export const TaskProvider = (props) => {
         });
     }
 
-    function deleteTask(id) {
+    async function deleteTask(id) {
         let url = baseUrl + `${task._id}`;
 
         return axios.delete(url, id).then(response => {
