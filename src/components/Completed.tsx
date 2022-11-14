@@ -1,8 +1,27 @@
-import { IonCheckbox, IonContent, IonHeader, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { Key, useState } from 'react';
+import { IonButton, IonCheckbox, IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList } from '@ionic/react';
+import { trash } from 'ionicons/icons';
+import { Key, useContext, useState } from 'react';
 import TaskContext from '../contexts/TaskContext';
 
 const CompletedTasks: React.FC = () => {
+
+    let [ task, setTask ] = useState({
+        _id: ''
+    });
+
+    let { editTask, deleteTask } = useContext(TaskContext);
+
+    function toggle(event: any) {
+        setTask({_id: event.target.value});
+        console.log(task);
+        let id = task._id;
+        editTask(id).then(() => {
+            window.location.reload();
+        }).catch((error: any) => {
+            console.log(error);
+        })
+    }
+
     return (
         <TaskContext.Consumer>
             {
@@ -15,10 +34,17 @@ const CompletedTasks: React.FC = () => {
                                 if (t.completed === true) {
                                     // {console.log(task)}
                                     return (
-                                        <IonItem key={t._id}>
-                                            <IonCheckbox slot='start' value={t.completed} checked={true} />
-                                            <IonLabel>{t.title}</IonLabel>
-                                        </IonItem>
+                                        <IonItemSliding>
+                                            <IonItem key={t._id}>
+                                                <IonCheckbox slot='start' value={t._id} checked={true} onClick={toggle} />
+                                                <IonLabel>{t.title}</IonLabel>
+                                            </IonItem>
+                                            <IonItemOptions side='end'>
+                                                <IonButton color='danger' onClick={() => {deleteTask(t._id)}}>
+                                                    <IonIcon slot="icon-only" icon={trash}></IonIcon>
+                                                </IonButton>
+                                            </IonItemOptions>
+                                        </IonItemSliding>
                                     )
                                 }
                             })}

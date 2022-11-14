@@ -21,7 +21,7 @@ const Home: React.FC = () => {
       setNewTask({title: newTitle});
       addTask(newTask);
     });
-}
+  }
 
   return (
     <IonPage>

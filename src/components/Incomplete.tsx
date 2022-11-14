@@ -1,32 +1,20 @@
-import { IonCheckbox, IonItem, IonLabel, IonList } from '@ionic/react';
+import { IonButton, IonCheckbox, IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList } from '@ionic/react';
+import { trash } from 'ionicons/icons';
 import { Key, useContext, useState } from 'react';
 import TaskContext from '../contexts/TaskContext';
 
 const IncompleteTasks: React.FC = () => {
 
-    let [ tasked, setTasked ] = useState({
-        _id: ""
+    let [ task, setTask ] = useState({
+        _id: ''
     });
 
-    let { editTask } = useContext(TaskContext);
-
-    // function handleChange(event: any) {
-    //     setTasked((prevValue) => {
-    //         return { ...prevValue, [event.target._id]: event.target.value}
-    //     })
-    // }
-
-    // const handleChange = (e: any) => {
-    //     const id = e.target._id;
-    //     setTasked(id);
-    //     console.log(id);
-    //     console.log(tasked);
-    // }
+    let { editTask, deleteTask } = useContext(TaskContext);
 
     function toggle(event: any) {
-        setTasked({_id: event.target.value});
-        // console.log(tasked);
-        let id = tasked._id;
+        setTask({_id: event.target.value});
+        console.log(task);
+        let id = task._id;
         editTask(id).then(() => {
             window.location.reload();
         }).catch((error: any) => {
@@ -48,10 +36,17 @@ const IncompleteTasks: React.FC = () => {
                                     return (
                                         <>
                                         {/* {console.log(t._id)} */}
-                                        <IonItem key={t._id}>
-                                            <IonCheckbox slot='start' value={t._id} checked={false} onClick={toggle} />
-                                            <IonLabel>{t.title}</IonLabel>
-                                        </IonItem>
+                                        <IonItemSliding key={t._id}>
+                                            <IonItem>
+                                                <IonCheckbox slot='start' value={t._id} checked={false} onClick={toggle} />
+                                                <IonLabel>{t.title}</IonLabel>
+                                            </IonItem>
+                                            <IonItemOptions side='end'>
+                                                <IonButton color='danger' onClick={() => {deleteTask(t._id)}}>
+                                                    <IonIcon slot="icon-only" icon={trash}></IonIcon>
+                                                </IonButton>
+                                            </IonItemOptions>
+                                        </IonItemSliding>
                                         </>
                                     )
                                 }

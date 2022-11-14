@@ -27,8 +27,8 @@ export const TaskProvider = (props) => {
     }
 
     async function editTask(id) {
-        let url = baseUrl + `${task._id}`;
-        
+        let url = baseUrl + `${id}`;
+        console.log(id);
         return axios.put(url, id).then(response => {
             getAllTasks();
             return new Promise(resolve => resolve(response.data));
@@ -36,10 +36,11 @@ export const TaskProvider = (props) => {
     }
 
     async function deleteTask(id) {
-        let url = baseUrl + `${task._id}`;
+        let url = baseUrl + `${id}`;
 
         return axios.delete(url, id).then(response => {
             getAllTasks();
+            return new Promise(resolve => resolve(response.data));
         })
     }
 
