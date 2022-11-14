@@ -5,23 +5,8 @@ import TaskContext from '../contexts/TaskContext';
 
 const IncompleteTasks: React.FC = () => {
 
-    let [ task, setTask ] = useState({
-        _id: ''
-    });
-
     let { editTask, deleteTask } = useContext(TaskContext);
 
-    function toggle(event: any) {
-        setTask({_id: event.target.value});
-        console.log(task);
-        let id = task._id;
-        editTask(id).then(() => {
-            window.location.reload();
-        }).catch((error: any) => {
-            console.log(error);
-        })
-    }
-    
     return (
         <TaskContext.Consumer>
             {
@@ -38,7 +23,7 @@ const IncompleteTasks: React.FC = () => {
                                         {/* {console.log(t._id)} */}
                                         <IonItemSliding key={t._id}>
                                             <IonItem>
-                                                <IonCheckbox slot='start' value={t._id} checked={false} onClick={toggle} />
+                                                <IonCheckbox slot='start' value={t.completed} checked={false} onClick={() => {editTask(t._id)}} />
                                                 <IonLabel>{t.title}</IonLabel>
                                             </IonItem>
                                             <IonItemOptions side='end'>
