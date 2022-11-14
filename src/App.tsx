@@ -26,8 +26,8 @@ import { TaskProvider } from './contexts/TaskProvider';
 setupIonicReact();
 
 const App: React.FC = () => (
-  <IonApp>
-    <TaskProvider>
+  <TaskProvider>
+    <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route exact path="/home">
@@ -38,8 +38,8 @@ const App: React.FC = () => (
           </Route>
         </IonRouterOutlet>
       </IonReactRouter>
-    </TaskProvider>
-  </IonApp>
+    </IonApp>
+  </TaskProvider>
 );
 
 export default App;

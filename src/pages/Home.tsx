@@ -1,18 +1,27 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonFooter, IonHeader, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { useContext, useState } from 'react';
 import CompletedTasks from '../components/Completed';
 import IncompleteTasks from '../components/Incomplete';
-// import ExploreContainer from '../components/ExploreContainer';
+import TaskContext from '../contexts/TaskContext';
+import { useDialog } from '../hooks/useDialog';
 import './Home.css';
 
 const Home: React.FC = () => {
 
-  // incompleteTasks[]
+  let [ newTask, setNewTask ] = useState({
+    title: 'newTask',
+    completed: false
+  })
 
-  // completeTasks[]
+  let { addTask } = useContext(TaskContext);
+  const { showAlert, showConfirm, showPrompt } = useDialog();
 
-  // displayIncomplete
-
-  // displayComplete
+  const prompt = async () => {
+    showPrompt('New Task!', 'What\'s your new task?').then(newTask => {
+      console.log('New Task: ' + newTask);
+      addTask(newTask);
+    });
+}
 
   return (
     <IonPage>
@@ -22,14 +31,17 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IncompleteTasks />
-        <CompletedTasks />
-        {/* addTask button footer floating */}
+        <IonList>
+          <IncompleteTasks />
+        </IonList>
+        <IonList>
+          <CompletedTasks />
+        </IonList>
+        <IonToolbar>
+          <IonFooter>
+            <IonButton onClick={ prompt } >+</IonButton>
+          </IonFooter>
+        </IonToolbar>
       </IonContent>
     </IonPage>
   );
