@@ -22,12 +22,12 @@ const IncompleteTasks: React.FC = () => {
                                         <>
                                         {/* {console.log(t._id)} */}
                                         <IonItemSliding key={t._id}>
-                                            <IonItem>
+                                            <IonItem color='primary'>
                                                 <IonCheckbox slot='start' value={t.completed} checked={false} onClick={() => {editTask(t._id)}} />
                                                 <IonLabel>{t.title}</IonLabel>
                                             </IonItem>
                                             <IonItemOptions side='end'>
-                                                <IonButton color='danger' onClick={() => {deleteTask(t._id)}}>
+                                                <IonButton color='tertiary' onClick={() => {deleteTask(t._id)}}>
                                                     <IonIcon slot="icon-only" icon={trash}></IonIcon>
                                                 </IonButton>
                                             </IonItemOptions>

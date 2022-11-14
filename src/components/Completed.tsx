@@ -20,12 +20,12 @@ const CompletedTasks: React.FC = () => {
                                     // {console.log(task)}
                                     return (
                                         <IonItemSliding>
-                                            <IonItem key={t._id}>
+                                            <IonItem color='medium' key={t._id}>
                                                 <IonCheckbox slot='start' value={t.completed} checked={true} onClick={() => {editTask(t._id)}} />
                                                 <IonLabel>{t.title}</IonLabel>
                                             </IonItem>
                                             <IonItemOptions side='end'>
-                                                <IonButton color='danger' onClick={() => {deleteTask(t._id)}}>
+                                                <IonButton color='tertiary' onClick={() => {deleteTask(t._id)}}>
                                                     <IonIcon slot="icon-only" icon={trash}></IonIcon>
                                                 </IonButton>
                                             </IonItemOptions>

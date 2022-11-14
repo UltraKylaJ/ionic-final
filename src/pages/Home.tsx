@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonFooter, IonHeader, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonFab, IonFabButton, IonHeader, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useContext, useState } from 'react';
 import CompletedTasks from '../components/Completed';
 import IncompleteTasks from '../components/Incomplete';
@@ -15,18 +15,10 @@ const Home: React.FC = () => {
   let { addTask } = useContext(TaskContext);
   const { showPrompt } = useDialog();
 
-  const prompt = async () => {
-    showPrompt('New Task!', 'What\'s your new task?').then(newTitle => {
-      console.log('New Task: ' + newTitle);
-      setNewTask({title: newTitle});
-      addTask(newTask);
-    });
-  }
-
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="primary">
+        <IonToolbar color="warning">
           <IonTitle>Task List</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -37,11 +29,21 @@ const Home: React.FC = () => {
         <IonList>
           <CompletedTasks />
         </IonList>
-        <IonToolbar>
-          <IonFooter>
-            <IonButton onClick={ prompt } >+</IonButton>
-          </IonFooter>
-        </IonToolbar>
+        <IonFab vertical='bottom' horizontal='end'>
+          <IonFabButton color='success' onClick={() => {
+              showPrompt(
+                'NEW TASK',
+                'Enter task here:',
+                'Let\'s Go!',
+                'Nevermind...'
+              ).then(value => {
+                setNewTask({title: value});
+                console.log(newTask);
+                addTask(newTask);
+                }
+              )
+          }} >+</IonFabButton>
+        </IonFab>
       </IonContent>
     </IonPage>
   );
